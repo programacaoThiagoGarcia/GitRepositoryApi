@@ -2,6 +2,8 @@ package com.example.gitrepositoryapi.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.gitrepositoryapi.R
 
 class MainActivity : AppCompatActivity() {
@@ -11,4 +13,5 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
     }
+
 }

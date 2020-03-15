@@ -18,8 +18,8 @@ import com.example.gitrepositoryapi.ui.viewmodel.DetailUserViewModel
 import com.example.gitrepositoryapi.ui.viewmodel.DetailUserViewModelFactory
 
 class DetailUser : Fragment() {
-    private lateinit var viewModelFactory : DetailUserViewModelFactory
-    private  lateinit var binding : DetailRepositoryFragmentBinding
+    private lateinit var viewModelFactory: DetailUserViewModelFactory
+    private lateinit var binding: DetailRepositoryFragmentBinding
 
     companion object {
         fun newInstance() = DetailUser()
@@ -31,7 +31,10 @@ class DetailUser : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.detail_repository_fragment, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.detail_repository_fragment, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -42,19 +45,20 @@ class DetailUser : Fragment() {
 
     private fun prepareViewModel() {
         viewModelFactory = DetailUserViewModelFactory("programacaoThiagoGarcia")
-        viewModel = ViewModelProvider(this,viewModelFactory).get(DetailUserViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailUserViewModel::class.java)
         viewModel.getUserDetail().observe(viewLifecycleOwner, Observer {
             it?.let {
                 prepareView(it)
             }
         })
         viewModel.getUserError().observe(viewLifecycleOwner, Observer {
-            Log.d(this::class.java.toString().toUpperCase(),it.toUpperCase())
+            Log.d(this::class.java.toString().toUpperCase(), it.toUpperCase())
         })
+        viewModel.loadData()
     }
 
     private fun prepareView(user: User) {
-
+        binding.user = user
     }
 
 }
