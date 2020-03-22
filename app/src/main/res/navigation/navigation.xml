@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/userList"
         android:name="com.example.gitrepositoryapi.ui.fragment.RepositoryList"
-        android:label="user_list_fragment"
-        tools:layout="@layout/user_list_fragment" >
+        android:label="Repository list"
+        tools:layout="@layout/user_list_fragment">
         <action
             android:id="@+id/action_userList_to_detailRepository"
             app:destination="@id/detailRepository" />
@@ -17,6 +17,10 @@
     <fragment
         android:id="@+id/detailRepository"
         android:name="com.example.gitrepositoryapi.ui.fragment.DetailUser"
-        android:label="detail_repository_fragment"
-        tools:layout="@layout/detail_repository_fragment" />
+        android:label="Detail Repository"
+        tools:layout="@layout/detail_repository_fragment">
+        <argument
+            android:name="login"
+            app:argType="string" />
+    </fragment>
 </navigation>

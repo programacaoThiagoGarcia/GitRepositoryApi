@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.gitrepositoryapi.R
 import com.example.gitrepositoryapi.databinding.UserListFragmentBinding
+import com.example.gitrepositoryapi.model.Repository
 import com.example.gitrepositoryapi.ui.adapter.ItemListClickCallback
 import com.example.gitrepositoryapi.ui.adapter.UserListAdapter
 import com.example.gitrepositoryapi.ui.viewmodel.RepositoryListViewModel
@@ -73,7 +74,9 @@ class RepositoryList : Fragment(), ItemListClickCallback {
 
     override fun <T>itemListClickCallbackReturn(item: T) {
         view?.let {
-            it.findNavController().navigate(R.id.action_userList_to_detailRepository)
+            val repository = item as Repository
+//            it.findNavController().navigate(R.id.action_userList_to_detailRepository)
+            it.findNavController().navigate(RepositoryListDirections.actionUserListToDetailRepository(repository.login))
         }
     }
 

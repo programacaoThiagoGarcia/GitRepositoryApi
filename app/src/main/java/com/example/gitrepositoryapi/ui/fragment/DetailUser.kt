@@ -20,6 +20,7 @@ import com.example.gitrepositoryapi.ui.viewmodel.DetailUserViewModelFactory
 class DetailUser : Fragment() {
     private lateinit var viewModelFactory: DetailUserViewModelFactory
     private lateinit var binding: DetailRepositoryFragmentBinding
+    private lateinit var login : String
 
     companion object {
         fun newInstance() = DetailUser()
@@ -31,6 +32,11 @@ class DetailUser : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val args = arguments?.let {
+            DetailUserArgs.fromBundle(it)
+
+        }
+        this.login = args?.login.toString()
         binding =
             DataBindingUtil.inflate(inflater, R.layout.detail_repository_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -44,7 +50,7 @@ class DetailUser : Fragment() {
     }
 
     private fun prepareViewModel() {
-        viewModelFactory = DetailUserViewModelFactory("programacaoThiagoGarcia")
+        viewModelFactory = DetailUserViewModelFactory(this.login)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailUserViewModel::class.java)
         viewModel.getUserDetail().observe(viewLifecycleOwner, Observer {
             it?.let {
